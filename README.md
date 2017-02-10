@@ -1,4 +1,31 @@
-# Example Drops 8 Composer
+# aten-d8-composer-upstream
+Pantheon upstream for Drupal 8. This is based largely on https://github.com/pantheon-systems/example-drops-8-composer
+
+## Why a new upstream
+This allows Aten to pull in various tools and have everything in one starting place.
+
+## Started with Example Drops 8 Composer
+`git pull git@github.com:pantheon-systems/example-drops-8-composer.git master`
+
+## Use GIT subtrees to pull in other REPOS
+
+### Subtrees are added with
+`git subtree add --prefix [directory] [repo-path] [branch] --squash`
+
+### Included subtrees that can be pulled in
+
+#### Aten D8 Install Profile
+
+The `composer` branch does not have any modules by default b/c composer adds them for us.
+
+`git subtree pull --prefix web/profiles/aten_d8 git@github.com:AtenDesignGroup/aten-d8-profile.git composer --squash`
+
+#### Aten Utils
+`git subtree pull --prefix utils/aten-gulp git@github.com:AtenDesignGroup/aten-gulp.git drupal-8 --squash`
+
+Checkout http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/ for more info on git subtrees.
+
+# README from Example Drops 8 Composer
 
 This repository can be used to set up a Composer-Managed Drupal 8 site on [Pantheon](https://pantheon.io).
 
