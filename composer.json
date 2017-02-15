@@ -43,7 +43,10 @@
   "conflict": {
       "drupal/drupal": "*"
   },
-  "minimum-stability": "alpha",
+  "minimum-stability": "dev",
+  "config": {
+    "preferred-install": "dist"
+  },
   "prefer-stable": true,
   "autoload": {
     "classmap": [
