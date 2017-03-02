@@ -4,15 +4,15 @@ Pantheon upstream for Drupal 8. This is based largely on https://github.com/pant
 ## Why a new upstream
 This allows Aten to pull in various tools and have everything in one starting place.
 
-## Started with Example Drops 8 Composer
-`git pull git@github.com:pantheon-systems/example-drops-8-composer.git master`
+## Creating a site on Pantheon with this upstream
 
-## Use GIT subtrees to pull in other REPOS
-
-### Subtrees are added with
-`git subtree add --prefix [directory] [repo-path] [branch] --squash`
-
-### Included subtrees that can be pulled in
+1. Create the site on pantheon
+1. Select the Aten D8 Composer Upstream option
+1. After that runs, clone the repo locally
+1. Inside the repo, run: `composer install && composer update`
+1. Switch the Pantheon site to SFTP mode.
+1. Go to the Pantheon site and install the site.
+1. Switch the site back to GIT mode.
 
 #### Aten D8 Install Profile
 
