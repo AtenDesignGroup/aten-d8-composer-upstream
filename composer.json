@@ -9,7 +9,7 @@
       "url": "https://packages.drupal.org/8"
     }
   ],
-    "require": {
+  "require": {
     "composer/installers": "^1.0.20",
     "rvtraveller/qs-composer-installer": "^1.1",
     "drupal-composer/drupal-scaffold": "^2.0.1",
