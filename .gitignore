@@ -107,3 +107,10 @@ Thumbs.db
 
 # Custom
 drush/drushrc.local.php
+
+# Module config that should get ignored on other environments
+devel.settings.yml
+devel.toolbar.settings.yml
+system.menu.devel.yml
+# stage_file_proxy config?
+# mailog?
