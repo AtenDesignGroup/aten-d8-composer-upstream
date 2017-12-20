@@ -51,15 +51,13 @@
 ###
 
 # Ignore Drupal's file directory
-/web/sites/*/files/
-
-# Ignore Drupal's file directory
 web/sites/default/files
 
 # Pantheon commits a settings.php for environment-specific settings.
 # Place local settings in settings.local.php
 web/sites/*/settings.local.php
 web/sites/*/services*.yml
+!web/sites/*/services.pantheon.*.yml 
 
 # Ignore SimpleTest multi-site environment.
 web/sites/simpletest

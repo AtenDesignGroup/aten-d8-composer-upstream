@@ -2,7 +2,7 @@
   "name": "pantheon-systems/example-drops-8-composer",
   "description": "Install drops-8 with Composer on Pantheon.",
   "type": "project",
-  "license": "GPL-2.0+",
+  "license": "MIT",
   "repositories": [
     {
       "type": "composer",
@@ -11,20 +11,21 @@
   ],
   "require": {
     "composer/installers": "^1.0.20",
-    "rvtraveller/qs-composer-installer": "^1.1",
-    "drupal-composer/drupal-scaffold": "^2.0.1",
     "cweagans/composer-patches": "^1.0",
-
-    "drupal/core": "~8",
-
-    "drupal/console": "^1.0.0-rc8",
+    "rvtraveller/qs-composer-installer": "^1.1",
+    "webflo/drupal-core-strict": "^8",
+    "drupal-composer/drupal-scaffold": "^2.0.1",
+    "drupal/config_direct_save": "^1.0",
+    "drupal/config_installer": "^1.0",
+    "drupal/console": "^1",
+    "drupal/core": "^8",
+    "drupal/simple_block": "^1.0@beta",
     "drush/drush": "~8",
     "drupal/config_direct_save": "^1.0",
     "drupal/adminimal_admin_toolbar": "^1.0",
     "drupal/inline_entity_form": "^1.0",
     "drupal/bootstrap": "^3.1",
     "drupal/adminimal_theme": "^1.0"
-
   },
   "require-dev": {
     "mikey179/vfsstream": "^1.2",
@@ -55,9 +56,12 @@
   },
   "scripts": {
     "build-assets": [
-      "./scripts/composer/install-or-update"
+      "@prepare-for-pantheon",
+      "composer install --optimize-autoloader"
     ],
-    "drupal-unit-tests": "cd web/core && ../../vendor/bin/phpunit --testsuite=unit --exclude-group Composer,DependencyInjection,PageCache",
+    "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
+    "code-sniff": "echo 'No code sniff step defined.'",
+    "unit-test": "echo 'No unit test step defined.'",
     "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
     "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
     "post-install-cmd": [
@@ -80,12 +84,36 @@
       "web/themes/contrib/{$name}": ["type:drupal-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
+    "build-env": {
+      "install-cms": [
+        "drush site-install standard --account-mail={account-mail} --account-name={account-name} --account-pass={account-pass} --site-mail={site-mail} --site-name={site-name} --yes",
+        "drush pm-enable config_direct_save simple_block --yes",
+        "drush pm-uninstall block_content --yes"
+      ],
+      "export-configuration": "drush config-export --yes"
+    },
     "drupal-scaffold": {
       "source": "https://raw.githubusercontent.com/pantheon-systems/drops-8/{version}/{path}",
       "includes": [
         "sites/default/default.services.pantheon.preproduction.yml",
         "sites/default/settings.pantheon.php"
+      ],
+      "excludes": [
+        ".csslintrc",
+        ".editorconfig",
+        ".eslintignore",
+        ".eslintrc.json",
+        ".htaccess",
+        "web.config"
       ]
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "platform": {
+      "php": "7.1"
     }
   }
 }
